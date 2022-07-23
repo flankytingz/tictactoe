@@ -3,6 +3,9 @@
         <meta charset="utf-8">
         <title></title>
         <style>
+            body {
+                background-color:teal;
+            }
             .no-select {
                 user-select: none;
             }
@@ -11,11 +14,11 @@
                 gap: 5px;
                 grid-template-columns: repeat(3, 50px);
                 grid-template-rows: repeat(3, 50px);
-                border: 1px black solid;
+                border: 1px whitesmoke solid;
                 padding: 5px;
             }
             .grid-child {
-                border: 1px black solid;
+                border: 1px white solid;
             }
             .center {
                 position: absolute;
@@ -26,85 +29,17 @@
         </style>
     </head>
     <body>
-        <div class="no-select grid center">
-            <div class="grid-child"><img src="blank.png" alt="1" id="cell1"></div>
-            <div class="grid-child"><img src="blank.png" alt="2" id="cell2"></div>
-            <div class="grid-child"><img src="blank.png" alt="3" id="cell3"></div>
-            <div class="grid-child"><img src="blank.png" alt="4" id="cell4"></div>
-            <div class="grid-child"><img src="blank.png" alt="5" id="cell5"></div>
-            <div class="grid-child"><img src="blank.png" alt="6" id="cell6"></div>
-            <div class="grid-child"><img src="blank.png" alt="7" id="cell7"></div>
-            <div class="grid-child"><img src="blank.png" alt="8" id="cell8"></div>
-            <div class="grid-child"><img src="blank.png" alt="9" id="cell9"></div>
+        <div id="table" class="no-select grid center">
+            <div class="grid-child"><img src="blank.png" alt="1" id="cell00"></div>
+            <div class="grid-child"><img src="blank.png" alt="2" id="cell01"></div>
+            <div class="grid-child"><img src="blank.png" alt="3" id="cell02"></div>
+            <div class="grid-child"><img src="blank.png" alt="4" id="cell10"></div>
+            <div class="grid-child"><img src="blank.png" alt="5" id="cell11"></div>
+            <div class="grid-child"><img src="blank.png" alt="6" id="cell12"></div>
+            <div class="grid-child"><img src="blank.png" alt="7" id="cell20"></div>
+            <div class="grid-child"><img src="blank.png" alt="8" id="cell21"></div>
+            <div class="grid-child"><img src="blank.png" alt="9" id="cell22"></div>
         </div>
-        <div class="no-select">
-            <button id="play-btn">Start</button>
-        </div>
-        <script>
-            let isXPlaying = true
-
-            let cells = [
-            document.getElementById("cell1"),
-            document.getElementById("cell2"), 
-            document.getElementById("cell3"),
-            document.getElementById("cell4"),
-            document.getElementById("cell5"),
-            document.getElementById("cell6"),
-            document.getElementById("cell7"),
-            document.getElementById("cell8"),
-            document.getElementById("cell9")
-        ]
-        
-            document.getElementById("play-btn").addEventListener("click", function() {                
-                document.getElementById("play-btn").innerText = " PLAY!"
-                for (const i of cells) {
-                    i.addEventListener("click", updateImage)
-                }
-            })
-
-            function updateImage(event) {
-                if (isXPlaying) {
-                    console.log("x played");
-                    event.srcElement.src = "x.png"
-                    event.srcElement.alt = "x"
-                    isXPlaying = false
-                } else {
-                    console.log("o played");
-                    event.srcElement.src = "o.png"
-                    event.srcElement.alt = "o"
-                    isXPlaying = true                    
-                }
-                checkForWin()
-            }
-
-            function checkForWin() {
-                if (cells[0].alt === cells[1].alt && cells[1].alt === cells[2].alt) {
-                    displayWin(cells[0])
-                } else if (cells[3].alt === cells[4].alt && cells[4].alt === cells[5].alt) {
-                    displayWin(cells[3])
-                } else if (cells[6].alt === cells[7].alt && cells[7].alt === cells[8].alt) {
-                    displayWin(cells[6])
-                } else if (cells[0].alt === cells[3].alt && cells[3].alt === cells[6].alt) {
-                    displayWin(cells[0])
-                } else if (cells[1].alt === cells[4].alt && cells[4].alt === cells[7].alt) {
-                    displayWin(cells[1])
-                } else if (cells[2].alt === cells[5].alt && cells[5].alt === cells[8].alt) {
-                    displayWin(cells[2])
-                } else if (cells[0].alt === cells[4].alt && cells[4].alt === cells[8].alt) {
-                    displayWin(cells[0])
-                } else if (cells[2].alt === cells[4].alt && cells[4].alt === cells[6].alt) {
-                    displayWin(cells[2])
-                }
-            }
-
-            function displayWin(whoWon) {
-                for (const i of cells) {
-                    i.removeEventListener("click", updateImage)
-                    i.src = "blank.png"
-                }
-                document.getElementById("play-btn").innerText = "Play Again!"
-                console.log(`\u001b[36m ${whoWon.alt} is the winner!`)
-            }
-        </script>
+        <script src="index.js" defer="true"></script>
     </body>
 </html>
